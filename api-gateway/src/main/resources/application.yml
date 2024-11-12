@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: laliga-api
+          uri: http://laliga-api:8081
+          predicates:
+            - Path=/laliga/**
+        - id: bundesliga-api
+          uri: http://bundesliga-api:8082
+          predicates:
+            - Path=/bundesliga/**
+        - id: premierleague-api
+          uri: http://premierleague-api:8083
+          predicates:
+            - Path=/premierleague/**
+        - id: ekstraklasa-api
+          uri: http://localhost:8084
+          predicates:
+            - Path=/ekstraklasa/**
+        - id: seriea-api
+          uri: http://seriea-api:8085
+          predicates:
+            - Path=/seriea/**
+        - id: transfermarket
+          uri: http://transfermarket:8086
+          predicates:
+            - Path=/transfermarket/**
+    discovery:
+      client:
+        service-url:
+          defaultZone: http://eureka-server:8761/eureka/
